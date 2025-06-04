@@ -1,15 +1,18 @@
 "use client"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import Image from "next/image";
 import { UpdateUserClasse } from "@/services/service-Aluno";
 import {
-   Input,
+  
    Popover,
    PopoverButton,
    PopoverGroup,
    PopoverPanel,
 } from "@headlessui/react";
-import { Bebas_Neue, Orbitron } from "next/font/google";
+import { Bebas_Neue} from "next/font/google";
 import { useState } from "react";
+import Link from "next/link";
 
 interface Link {
    name: string;
@@ -20,7 +23,7 @@ interface HeaderProps {
    TextButton?: string;
    link: Link[];
    handleLogout?: () => void;
-   StudentName?: any;
+   StudentName?: string;
    StudentPhoto?: string | null;
    turma?: string | null
    IdStudent: number;
@@ -28,15 +31,10 @@ interface HeaderProps {
 }
 
 
-const products = [
-   {
-      name: "Analytics",
-      description: "Get a better understanding of your traffic",
 
-   },
-
-];
 const bebasNeue = Bebas_Neue({
+   subsets: ['latin'],
+    preload: true,
    weight: ["400"]
 })
 export default function Header({
@@ -58,7 +56,7 @@ export default function Header({
 
       try {
          const newUserCredential = await UpdateUserClasse(IdStudent, turmaUser);
-
+ return newUserCredential
       } catch (err: any) {
          console.error("Erro ao criar usuário:", err.message);
          alert("Erro ao criar usuário: " + err.message);
@@ -67,14 +65,14 @@ export default function Header({
    return (
       <header className=" flex flex-col w-screen md:flex-row justify-between items-center px-6 md:px-10 py-4 border-b border-gray-700 gap-4 ">
 
-         <a href="gamequest.com">
+         <Link href="gamequest.com">
             <Image
                src={"/login/LogoBranca.svg"}
                alt="Logo da empresa"
                width={180}
                height={90}
             />
-         </a>
+         </Link>
 
          <nav className="flex flex-wrap justify-center gap-4 md:gap-8 text-lg">
             {link.map((item, index) => (

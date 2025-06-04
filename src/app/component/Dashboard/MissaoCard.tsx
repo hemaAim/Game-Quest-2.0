@@ -1,8 +1,10 @@
 "use client"
 
+
 import { Poppins, Bebas_Neue } from "next/font/google"
 import Image from "next/image"
-import { FC } from "react"
+import Link from "next/link"
+
 
 
 
@@ -29,13 +31,17 @@ interface MissaoCardProps {
 }
 
 const poppins = Poppins({
+   subsets: ['latin'],
+    preload: true,
    weight: ["500"]
 })
 
 const bebasNeue = Bebas_Neue({
+   subsets: ['latin'],
+    preload: true,
    weight: ["400"]
 })
-const MissaoCard = ({ imageSrc, title, gems, progress, onClick, vencimento, description, BorderPosition, mitlicador, spanTimeBool, time, idToURL }: MissaoCardProps) => {
+const MissaoCard = ({ imageSrc, title, gems, progress, onClick, spanTimeBool, time, idToURL }: MissaoCardProps) => {
 
    const URL = `${idToURL}`
 
@@ -83,9 +89,9 @@ const MissaoCard = ({ imageSrc, title, gems, progress, onClick, vencimento, desc
                   onClick={onClick}
                   className={`${bebasNeue.className} cursor-pointer  text-white  py-2 px-4 w-full   bg-[#FF6F00] hover:bg-orange-600 transition rounded-lg  focus:outline focus:outline-offset-2`}>
 
-                  <a href={`/${URL}`} className="text-sm ">
+                  <Link href={`/${URL}`} className="text-sm ">
                      Iniciar Missão
-                  </a>
+                  </Link>
                </button>
 
 

@@ -1,16 +1,17 @@
 "use client"
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from "next/image"
-import { IBM_Plex_Mono, Bebas_Neue, Poppins } from "next/font/google"
+import {  Bebas_Neue, Poppins } from "next/font/google"
 const bebasNeue = Bebas_Neue({ 
+  subsets: ['latin'],
+    preload: true,
   weight: ["400"]
-})
-const ibm = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "700"],
 })
 
 const poppins = Poppins({
+  subsets: ['latin'],
+    preload: true,
   weight: ["200"],
 })
 

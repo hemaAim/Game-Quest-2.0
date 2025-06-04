@@ -1,4 +1,5 @@
 "use client"
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
 import CupomCard from "../component/CupomCard";
@@ -12,6 +13,8 @@ import Gema from "../component/Gema";
 
 
 const Bebasneue = Bebas_Neue({
+   subsets: ['latin'],
+   preload: true,
    weight: ["400"]
 })
 function VoucherPage() {

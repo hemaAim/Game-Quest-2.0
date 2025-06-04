@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Aluno } from "../types/Aluno";
 
-import { Aluno } from "@/types/Aluno";
+
 
 
 interface ListaAlunoProps {
@@ -21,7 +22,6 @@ export default function useTurmaAlunos({ email, turma }: ListaAlunoProps = {}) {
     const fetchData = async () => {
       try {
        
-
         const alunosFiltrados = alunos.filter((aluno) => {
           const turmaAluno = aluno.fields?.find((field) => field.name === "Turma do WIT")?.value ?? "";
           return turmaAluno.toLowerCase() === turma?.toLowerCase();
@@ -44,7 +44,7 @@ export default function useTurmaAlunos({ email, turma }: ListaAlunoProps = {}) {
     };
 
     fetchData();
-  }, [email, turma]);
+  }, [email, turma, alunos]);
 
 
   

@@ -1,9 +1,9 @@
 "use client"
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 
 import { auth } from "../firabase.config";
-import { onAuthStateChanged, User, signOut } from "firebase/auth";
+import {  signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { TemporadaELiga } from "@/app/types/TemporadaELiga"
 import Card from "./component/Dashboard/Card";
@@ -11,11 +11,11 @@ import TemporadaCard from "./component/Dashboard/TemporadaCard";
 import PontuacoesXpsGema from "./component/Dashboard/PontuacoesXpsGema";
 import MissaoCard from "./component/Dashboard/MissaoCard";
 import { useDesafios } from "@/app/hooks/useDesafios";
-import ListaAlunos from "./component/ListaAlunos";
+
 import ListaTurmaDoAlunoLogado from "./component/ListaTurmaDoAluno";
 import Header from "./component/Header";
 import { Desafio } from "./types/Desafios";
-import DesafioModal from "./component/Dashboard/DesafioModalProps";
+
 import PegandoDadosDaTemporada from "../services/service-Temporada"
 import { useTemporadaELiga } from "./hooks/useTemporadaELiga";
 import { useAuth } from "./context/AuthContext";
@@ -23,7 +23,7 @@ export default function Home() {
 
 
 
-  const [desafioSelecionado, setDesafioSelecionado] = useState<Desafio | null>(null);
+  const [, setDesafioSelecionado] = useState<Desafio | null>(null);
   const [, setTemporadas] = useState<TemporadaELiga[]>([]);
   const { desafios } = useDesafios(334266439);
 
@@ -100,7 +100,7 @@ export default function Home() {
                 {temporadaELiga && (
                   <TemporadaCard
                     Description={temporadaELiga?.descricao || ""}
-                    Link={"/temporada"}
+                    Links={"/temporada"}
                     Recompense={`${temporadaELiga?.quantidade_de_criptons_fixos} `}
                     Title={temporadaELiga?.nome_da_temporada || ""}
                   />
@@ -121,7 +121,7 @@ export default function Home() {
                 <h2 className="text-2xl font-bold mb-4 text-white">MISSÕES 🚀</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                   {desafios.map((desafio) => (
-                    <MissaoCard description={desafio.descricao} mitlicador={desafio.multiplicador} idToURL={desafio.id} spanTimeBool="" time={desafio.tempo_da_atividade} BorderPosition="" gems={desafio.pontos} imageSrc="/Dashboard/ImgSorteio.svg" onClick={() => setDesafioSelecionado(desafio)} progress="" title={desafio.Titulo} vencimento="10/20" />
+                    <MissaoCard key={desafio.id} description={desafio.descricao} mitlicador={desafio.multiplicador} idToURL={desafio.id} spanTimeBool="" time={desafio.tempo_da_atividade} BorderPosition="" gems={desafio.pontos} imageSrc="/Dashboard/ImgSorteio.svg" onClick={() => setDesafioSelecionado(desafio)} progress="" title={desafio.Titulo} vencimento="10/20" />
                   ))} </div>
 
 

@@ -1,5 +1,5 @@
 "use client";
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
@@ -8,6 +8,7 @@ import Image from "next/image";
 import { Poppins } from "next/font/google";
 import Carousel from "../component/Carrocel";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import Link from "next/link";
 
 const poppins = Poppins({ weight: ["400"], subsets: ["latin"] });
 
@@ -16,7 +17,7 @@ const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const [signInWithEmailAndPassword, userCredential, loading, error] =
+  const [signInWithEmailAndPassword,  error] =
     useSignInWithEmailAndPassword(auth);
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -46,7 +47,7 @@ const SignIn = () => {
   };
 
   useEffect(() => {
-    if (error) alert("Erro ao logar: " + error.message);
+    if (error) alert("Erro ao logar: " );
   }, [error]);
 
   const frases = [
@@ -64,7 +65,7 @@ const SignIn = () => {
           {/* Left side */}
           <div className="px-10 py-12 flex flex-col   justify-center">
             <p className="text-sm text-center text-gray-500 mt-6">
-              Não tenho conta <a href="/cadastro" className="text-blue-500 underline">cadastro</a>
+              Não tenho conta <Link href="/cadastro" className="text-blue-500 underline">cadastro</Link>
             </p>
             <h2 className="text-3xl font-semibold mb-2 text-[#030051]">Login</h2>
             <p className="text-gray-600 mb-6">Insira suas credencias para logar na plataforma</p>
@@ -104,7 +105,7 @@ const SignIn = () => {
 
               <label className="flex items-center text-sm text-gray-500 gap-2">
                 <input type="checkbox" className="mr-2 m-2" />
-                Eu aceito os termos <a href="#" className="text-blue-500 underline">Terms & Privacy</a>
+                Eu aceito os termos <Link href="#" className="text-blue-500 underline">Terms & Privacy</Link>
               </label>
 
               <button onClick={handleLogin} className="bg-[#FF6F00] text-white py-2 rounded-md cursor-pointer text-sm font-medium hover:bg-[#E36300]">

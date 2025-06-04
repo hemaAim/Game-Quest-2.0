@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Desafio } from "@/app/types/Desafios";
-import { TemporadaELiga } from "@/app/types/TemporadaELiga"
 
- const PIPEFY_API_URL = "https://api.pipefy.com/graphql";
-  const PIPEFY_TOKEN = "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJQaXBlZnkiLCJpYXQiOjE3Mzk4MTY4MDcsImp0aSI6Ijk3ODFhYmRjLThhMDItNDU2Ni05MzBjLTE0Mzk2MzQwNWVkZiIsInN1YiI6MzAyNDA2NzU2LCJ1c2VyIjp7ImlkIjozMDI0MDY3NTYsImVtYWlsIjoiYWltaGVtYTc3QGdtYWlsLmNvbSJ9fQ.6l60GT46e8hU6Alzvg9-x0vSsbraVpp3a1NulAk8JcZs-9N4vN8iFQYxQZgB6wtfV0U184_Mr6oUb_JKYjX3pw"
-  const PIPE_ID = 334522537; // Converte para número
+
+const PIPEFY_API_URL = process.env.NEXT_PUBLIC_PIPEFY_API_URL!;
+const PIPEFY_TOKEN = process.env.NEXT_PUBLIC_PIPEFY_TOKEN
+ const PIPE_ID = 334522537; // Converte para número
 
 export default async function PegandoDadosDaTemporada() {
  

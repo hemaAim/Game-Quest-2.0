@@ -1,13 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Bebas_Neue, Orbitron } from "next/font/google";
+import { Bebas_Neue } from "next/font/google";
 import { PegarAlunosParaTabela } from "@/services/service-Aluno";
 import { Aluno } from "../types/Aluno";
 import Gema from "./Gema";
 
-// Fonte
-const orbitron = Orbitron({ subsets: ["latin"], weight: ["400", "900"] });
 
 // Props do componente
 interface ListaAlunoProps {

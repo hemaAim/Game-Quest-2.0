@@ -1,5 +1,6 @@
 "use client"
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import { auth } from "../../firabase.config";  // certifique que o 'auth' está exportado
 import { User, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
@@ -8,9 +9,13 @@ import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { CriandoAlunoNoPipefy } from "@/services/service-Aluno";
 import { Poppins } from "next/font/google";
 import Image from "next/image";
+import Link from "next/link";
 
 const poppins = Poppins({
+   subsets: ['latin'],
+    preload: true,
   weight: ["400"],
+ 
 });
 
 const SignUp = () => {
@@ -206,7 +211,7 @@ const SignUp = () => {
           </form>
 
           <p className="text-sm text-center text-gray-500 mt-6">
-            Não tenho conta <a href="/login" className="text-blue-500 underline">Login</a>
+            Não tenho conta <Link href="/login" className="text-blue-500 underline">Login</Link>
           </p>
         </div>
 

@@ -1,4 +1,4 @@
-// components/VRCard.tsx
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from 'next/image';
 import React from 'react';
 
@@ -37,7 +37,8 @@ export default function VRCard({ title, price, vencimento, onClick, time }: VRca
       <div className="rounded-xl p-2 w-72 text-white font-sans shadow-lg">
          <div className="bg-[#07070F] rounded-xl p-4">
             <div className="relative mb-4">
-               <img
+               <Image 
+               
                   src={`/cardCompra.svg`}
                   alt="Óculos VR"
                   className="rounded-lg w-full object-cover opacity-20"

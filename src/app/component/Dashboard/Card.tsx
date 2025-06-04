@@ -1,12 +1,14 @@
 "use client"
 
 import Image from "next/image"
-import { IBM_Plex_Mono, Poppins, Bebas_Neue } from "next/font/google";
+import {  Bebas_Neue } from "next/font/google";
 
-
+import Link from "next/link";
 
 
 const bebasNeue = Bebas_Neue({
+   subsets: ['latin'],
+    preload: true,
   weight: ["400"]
 })
 interface CardProps { 
@@ -20,7 +22,7 @@ link: string
 const Card = ({title, img,  price, link}: CardProps) => {
    return (
       <div className="min-w-[416px] h-[306px] rounded-2xl overflow-hidden  bg-[#07070F] flex flex-col justify-between">
-<a href={link}> 
+<Link href={link}> 
 
 
          {/* Parte da imagem com título sobreposto */}
@@ -47,7 +49,7 @@ const Card = ({title, img,  price, link}: CardProps) => {
             />
             <span className={` ${bebasNeue.className} text-white text-lg font-medium`}>{price} GEM</span>
          </div>
-         </a>
+         </Link>
       </div>
    )
 }

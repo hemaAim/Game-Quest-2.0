@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Desafio } from "@/app/types/Desafios";
-import { number } from "motion";
+
 
 const PIPEFY_API_URL = process.env.NEXT_PUBLIC_PIPEFY_API_URL!;
 const PIPEFY_TOKEN = process.env.NEXT_PUBLIC_PIPEFY_TOKEN

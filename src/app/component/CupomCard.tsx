@@ -12,6 +12,8 @@ type CupomCardProps = {
 };
 
 const Bebasneue = Bebas_Neue({
+  subsets: ['latin'],
+    preload: true,
   weight: ["400"]
 })
 export default function CupomCard({

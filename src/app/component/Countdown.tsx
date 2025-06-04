@@ -8,6 +8,8 @@ interface CountdownProps {
    inicio: string
 } 
 const poppin = Poppins({ 
+   subsets: ['latin'],
+    preload: true,
   weight: ["300" ,"400" , "500", "600" , "700", "800", "900"] 
 })
 

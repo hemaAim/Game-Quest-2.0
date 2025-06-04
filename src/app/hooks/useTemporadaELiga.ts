@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState, useEffect } from "react";
 import PegandoDadosDaTemporada from "@/services/service-Temporada";
 import { TemporadaELiga } from "@/app/types/TemporadaELiga";

@@ -76,7 +76,7 @@ function Marketplace() {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4  ">
 
                {marketplace.map((marketplace) => (
-                  <div className="flex items-center justify-center">
+                  <div key={marketplace.id} className="flex items-center justify-center">
 
                      <VRCard img="SVGoculosVr.svg" vencimento={marketplace.vencimento} price={marketplace.Price} time={marketplace.TempoDeEntrega} title={marketplace.Titulo} onClick={() => handleComprarProduto(marketplace.id)} />
                   </div>

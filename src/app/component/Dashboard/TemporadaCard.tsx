@@ -1,21 +1,24 @@
 "use client"
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from "next/image"
-
+import Link from "next/link"
 
 import { Bebas_Neue } from "next/font/google"
 
 const bebasNeue = Bebas_Neue({
+  subsets: ['latin'],
+    preload: true,
   weight: ["400"]
 })
 interface TemporadaCardProps {
   Title: string;
   Description: string;
   Recompense: any;
-  Link: string
+  Links: string
 }
 
-const TemporadaCard = ({ Description, Recompense, Title, Link }: TemporadaCardProps) => {
+const TemporadaCard = ({ Description, Recompense, Title, Links }: TemporadaCardProps) => {
   return (
   <div className="relative lg:min-w-2xl  rounded-2xl overflow-hidden bg-black">
   {/* Imagem de fundo */}
@@ -54,7 +57,7 @@ const TemporadaCard = ({ Description, Recompense, Title, Link }: TemporadaCardPr
       <button
         className={`${bebasNeue.className} text-sm font-semibold py-3 px-7 bg-[#FF6F00] cursor-pointer hover:bg-orange-600 transition rounded-lg text-white`}
       >
-        <a href={Link}>Ver Temporada</a>
+        <Link href={Links}>Ver Temporada</Link>
       </button>
     </div>
   </div>

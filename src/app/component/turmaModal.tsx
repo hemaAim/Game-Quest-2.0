@@ -7,7 +7,7 @@ type Props = {
 
 export default function TurmaModal({ turmas, onSelectTurma }: Props) {
   const [isOpen, setIsOpen] = useState(true);
-  const [selectedTurma, setSelectedTurma] = useState<string | null>(null);
+  const [, setSelectedTurma] = useState<string | null>(null);
 
   const handleSelect = (turma: string) => {
     setSelectedTurma(turma);

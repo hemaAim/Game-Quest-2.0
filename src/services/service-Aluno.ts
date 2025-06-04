@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Aluno } from '@/app/types/Aluno'
 
 
@@ -174,7 +175,7 @@ export async function CriandoAlunoNoPipefy(
 
 
 
-export const PegarAlunosParaTabela = async (afterCursor?: string): Promise<{ alunos: Aluno[]; hasNextPage: boolean; endCursor?: string }> => {
+export const PegarAlunosParaTabela = async (): Promise<{ alunos: Aluno[]; hasNextPage: boolean; endCursor?: string }> => {
   const query = `{
      allCards(pipeId: 305731497, first: 50) {
         pageInfo {

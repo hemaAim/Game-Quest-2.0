@@ -3,7 +3,7 @@
 import RequireAdmin from "@/app/component/RequireAdmin";
 import Header from "../component/Header";
 import { useAuth } from "../context/AuthContext";
-import ListaTurmaDoAlunoLogado from "../component/ListaTurmaDoAluno";
+
 import { useState } from "react";
 import ListaTurmaDoAlunoADM from "../component/ListaAlunoADM";
 

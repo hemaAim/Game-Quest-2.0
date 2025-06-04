@@ -16,7 +16,10 @@ interface ListaAlunoProps {
 
 }
 
-const bebasNeue = Bebas_Neue({ weight: ["400"] });
+const bebasNeue = Bebas_Neue({ 
+   subsets: ['latin'],
+    preload: true,
+    weight: ["400"] });
 
 export default function ListaTurmaDoAlunoLogado({ title, turma, email }: ListaAlunoProps) {
    const [alunos, setAlunos] = useState<Aluno[]>([]);

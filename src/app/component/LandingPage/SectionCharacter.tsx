@@ -1,10 +1,11 @@
 "use client"
 
-import Image from "next/image"
+
+
 import { Karantina, Protest_Strike, Poppins } from 'next/font/google'
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef } from "react"
-import { button } from "motion/react-client"
+
 
 interface CharacterProps {
   title: string,
@@ -14,7 +15,7 @@ interface CharacterProps {
   Functions: string
   Img: string,
   idSection: string
-  y: string | any
+  
   NextIdSection: string
   reverse?: boolean
 }
@@ -35,7 +36,7 @@ const protest_Strike = Protest_Strike({
 const SectionCharacter = ({
   title, Description, Img,
   TitleFunction, TitleDescription,
-  Functions, idSection, y, NextIdSection, reverse
+  Functions, idSection, NextIdSection, reverse
 }: CharacterProps) => {
 
   const ref = useRef<HTMLDivElement>(null)
@@ -48,7 +49,7 @@ const SectionCharacter = ({
 
   // Parallax no texto e na imagem
   const imageY = useTransform(scrollYProgress, [0, 1], ["600px", "-600px"])
-  const textY = useTransform(scrollYProgress, [0, 1], ["0deg", "360deg"])
+
 
   const textRtoLX = useTransform(scrollYProgress, [0, 1], ["-600px", "600px"]) // vem da direita
   const textLtoRX = useTransform(scrollYProgress, [0, 1], ["500px", "-500px"]) // vem da direita

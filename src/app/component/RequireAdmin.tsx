@@ -2,7 +2,7 @@
 import { useAuth } from "@/app/context/AuthContext";
 import { useRouter } from "next/navigation";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function RequireAdmin({ children }: { children: React.ReactNode }) {
   const { aluno, loading } = useAuth();

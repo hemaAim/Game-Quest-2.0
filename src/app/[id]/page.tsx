@@ -1,16 +1,17 @@
 "use client";
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { DesafioService } from "@/services/DesafioService";
 import type { Desafio } from "@/app/types/Desafios"; // ajuste o caminho
-import CardDetalheMissão from "../component/CardInfo";
+
 import CardDetalheMissao from "../component/CardInfo";
 import Header from "../component/Header";
-import { auth } from "@/firabase.config";
+
 import { useAuth } from "../context/AuthContext";
 import Image from "next/image";
 import MinesGame from "../component/MinesGame";
+import Link from "next/link";
 
 
 const LessonPage = () => {
@@ -22,7 +23,7 @@ const LessonPage = () => {
    const [desafio, setDesafio] = useState<Desafio | null>(null);
    const [loading, setLoading] = useState(true);
    const [error, setError] = useState<string | null>(null);
-
+   const { user, aluno, logout } = useAuth();
    useEffect(() => {
       if (!idParam) {
          setError("ID não fornecido");
@@ -43,7 +44,7 @@ const LessonPage = () => {
             setDesafio(res);
             setLoading(false);
          })
-         .catch((err) => {
+         .catch(() => {
             setError("Erro ao buscar desafio");
             setLoading(false);
          });
@@ -51,7 +52,7 @@ const LessonPage = () => {
 
    if (loading) return <p>Carregando...</p>;
    if (error) return <p>Erro: {error}</p>;
-   const { user, aluno, logout } = useAuth();
+
 
 
 
@@ -141,9 +142,9 @@ const LessonPage = () => {
                      <button
                         className="text-sm font-semibold py-4 px-3 cursor-pointer bg-[#FF6F00] hover:bg-orange-600 transition rounded-lg text-white"
                      >
-                        <a href="/">
+                        <Link href="/">
                            Realizado
-                        </a>
+                        </Link>
                      </button>
                   </div>
                </div>
