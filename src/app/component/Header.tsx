@@ -67,7 +67,7 @@ export default function Header({
 
          <Link href="gamequest.com">
             <Image
-               src={"/login/logobranca.svg"}
+               src={"/Login/logobranca.svg"}
                alt="Logo da empresa"
                width={180}
                height={90}
