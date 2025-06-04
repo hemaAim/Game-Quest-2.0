@@ -4,13 +4,13 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCoO8tBYersQ0dmC4EWCzveR09XN18vEAE",
-  authDomain: "game-questplataformgamificacao.firebaseapp.com",
-  projectId: "game-questplataformgamificacao",
-  storageBucket: "game-questplataformgamificacao.appspot.com",
-  messagingSenderId: "339485728689",
-  appId: "1:339485728689:web:abbe115929b150756e2790",
-  measurementId: "G-NJL9LL2KGY"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN!,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID!,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET!,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID!,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID!,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID!,
 };
 
 const app = initializeApp(firebaseConfig);
