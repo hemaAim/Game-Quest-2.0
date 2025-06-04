@@ -319,8 +319,10 @@ export const transferirBitcoin = async (
     // 🔹 2️⃣ PEGAR O SALDO ATUAL E SOMAR
     const fields = balanceData.data.card.fields;
     const bitcoinField = fields.find((field: any) => field.name === "Bitcoin");
-    const saldoAtual = bitcoinField ? parseFloat(bitcoinField.value) : 0;
-    const novoSaldo = saldoAtual + quantidade;
+    const saldoAtual = bitcoinField ? parseFloat(bitcoinField.value.replace(',', '.')) : 0;
+const novoSaldo = parseFloat((saldoAtual + quantidade).toFixed(2));
+
+
     console.log("💰 BITCOIN FIELD:", bitcoinField);
     console.log("💰 Saldo atual:", saldoAtual);
     console.log("➕ Novo saldo após recebimento:", novoSaldo);
@@ -362,7 +364,7 @@ export const transferirBitcoin = async (
     console.log("🔄 Atualizando saldo do destinatário...");
     const updateDestinatarioQuery = `
         mutation {
-           updateCardField(input: {card_id: ${destinatarioId}, field_id: "bitcoin", new_value: "${novoSaldo}"}) {
+           updateCardField(input: {card_id: ${destinatarioId}, field_id: "bitcoin", new_value: "${novoSaldo.toFixed(2)}"}) {
               card {
                  title
               }
