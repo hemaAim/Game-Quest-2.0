@@ -70,9 +70,9 @@ export default function ListaTurmaDoAlunoLogado({ title, turma, email }: ListaAl
          return nome.toLowerCase().includes(termoPesquisa.toLowerCase());
       })
       .sort((a, b) => {
-         const xpA = parseFloat(getField(a, "Bitcoin").replace(",", ".")) || 0;
+         const xpA = parseFloat(getField(a, "Pontos Atuais").replace(",", ".")) || 0;
 
-         const xpB = parseFloat(getField(b, "Bitcoin").replace(",", ".")) || 0;
+         const xpB = parseFloat(getField(b, "Pontos Atuais").replace(",", ".")) || 0;
 
          return xpB - xpA; // ordem decrescente
       });

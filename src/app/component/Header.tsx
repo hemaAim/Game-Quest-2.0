@@ -114,7 +114,7 @@ export default function Header({
                         <div className=" mt-2  px-4 py-2 flex items-center gap-3 border-b-1 border-zinc-700  ">
 
                            <Image
-                              src={StudentPhoto || "/Images/avatarNull.png"}
+                              src={StudentPhoto || "/images/avatarNull.png"}
                               alt="Avatar do aluno"
                               width={38}
                               height={38}

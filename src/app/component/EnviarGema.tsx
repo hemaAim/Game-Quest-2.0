@@ -86,11 +86,15 @@ const EnviarGemaModal = ({
                            Insira o valor a transferir:
                         </label>
                         <input
-                           type="number"
+                           type="text"
                            value={valorTransferencia}
-                           onChange={(e) => setValorTransferencia(Number(e.target.value))}
+                           onChange={(e) => {
+                              const onlyNumbers = e.target.value.replace(/\D/g, ""); // remove não-dígitos
+                              const asCents = (parseInt(onlyNumbers || "0", 10) / 100).toFixed(2); // transforma em decimal fixo
+                              setValorTransferencia(asCents); // salva como string ou número, como preferir
+                           }}
                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                           placeholder="Digite o valor"
+                           placeholder="Digite o valor (ex: 1 = R$0,01)"
                         />
                      </div>
                      <div className="grid grid-cols-9 w-full items-center gap-2 my-1 ">

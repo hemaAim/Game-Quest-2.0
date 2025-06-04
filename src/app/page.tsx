@@ -110,7 +110,7 @@ export default function Home() {
               </div>
             </div>
             <div className="md:col-span-1">
-              <Card img="../sorteioImg.svg" price={30} title="SORTEIO" link="landingpage" />
+              <Card img="../sorteioImg.svg" price={30} title="SORTEIO" link="game" />
             </div>
           </div>
 
