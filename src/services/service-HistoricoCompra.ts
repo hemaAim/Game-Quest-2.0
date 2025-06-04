@@ -33,17 +33,17 @@ export async function registrarCompra({ alunoId, produtoId, nomeProduto, preco }
 }
 
 export async function listarComprasDoAluno(alunoId: string) {
-  try {
-    const historicoRef = collection(db, "historicoCompras");
-    const q = query(historicoRef, where("alunoId", "==", alunoId));
-    const snapshot = await getDocs(q);
+   try {
+      const historicoRef = collection(db, "historicoCompras");
+      const q = query(historicoRef, where("alunoId", "==", alunoId));
+      const snapshot = await getDocs(q);
 
-    return snapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    }));
-  } catch (error) {
-    console.error("Erro ao buscar histórico:", error);
-    return [];
-  }
+      return snapshot.docs.map(doc => ({
+         id: doc.id,
+         ...doc.data()
+      }));
+   } catch (error) {
+      console.error("Erro ao buscar histórico:", error);
+      return [];
+   }
 }
