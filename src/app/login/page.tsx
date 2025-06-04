@@ -64,9 +64,7 @@ const SignIn = () => {
         <div className="w-full max-w-6xl bg-white h-10/12 max-h-[600px] items-start justify-between rounded-[20px] overflow-hidden shadow-lg grid grid-cols-1 md:grid-cols-2">
           {/* Left side */}
           <div className="px-10 py-12 flex flex-col   justify-center">
-            <p className="text-sm text-center text-gray-500 mt-6">
-              Não tenho conta <Link href="/cadastro" className="text-blue-500 underline">cadastro</Link>
-            </p>
+        
             <h2 className="text-3xl font-semibold mb-2 text-[#030051]">Login</h2>
             <p className="text-gray-600 mb-6">Insira suas credencias para logar na plataforma</p>
 
@@ -112,7 +110,9 @@ const SignIn = () => {
                 Login
               </button>
             </form>
-
+    <p className="text-sm text-center text-gray-500 mt-6">
+              Não tenho conta <Link href="/cadastro" className="text-blue-500 underline">cadastro</Link>
+            </p>
 
           </div>
 
