@@ -16,7 +16,7 @@ export default function AdminPage() {
       <div className="flex flex-col items-center p-4 font-sans">
         <Header
           StudentEmail={user?.email || aluno?.email || null}
-          StudentPhoto={user?.photoURL || "/default-user.png"}
+          StudentPhoto={user?.photoURL}
           IdStudent={aluno?.id}
           StudentName={user?.displayName || aluno?.nome_do_aluno}
           turma={aluno?.turma_do_wit}

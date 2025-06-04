@@ -86,7 +86,7 @@ export default function Header({
             {/* Avatar com nome */}
             <div className="flex items-center gap-2 py-2 px-4 w-fit rounded-full border border-orange-500 cursor-pointer transition">
                <Image
-                  src={StudentPhoto || "/Images/avatarNull.png"}
+                  src={StudentPhoto ||  "/images/avatarNull.png"}
                   alt="Avatar do aluno"
                   width={32}
                   height={32}

@@ -51,7 +51,7 @@ function Marketplace() {
 
          <Header
             StudentEmail={user?.email || aluno?.email || null}
-            StudentPhoto={user?.photoURL || "/default-user.png"}
+            StudentPhoto={user?.photoURL}
             IdStudent={aluno?.id} // ou buscar esse ID de outro lugar, como do contexto de aluno
             StudentName={user?.displayName || aluno?.nome_do_aluno}
             turma={aluno?.turma_do_wit}
