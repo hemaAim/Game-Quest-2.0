@@ -10,7 +10,7 @@ import Header from "../component/Header";
 
 import { useAuth } from "../context/AuthContext";
 import Image from "next/image";
-import MinesGame from "../component/MinesGame";
+
 import Link from "next/link";
 
 
