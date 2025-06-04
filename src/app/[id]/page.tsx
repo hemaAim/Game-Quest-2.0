@@ -149,7 +149,7 @@ const LessonPage = () => {
                   </div>
                </div>
             </div>
-            <MinesGame />
+         
          </div>
       </>
    );
