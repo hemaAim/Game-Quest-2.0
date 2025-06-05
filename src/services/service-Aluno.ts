@@ -394,7 +394,7 @@ const novoSaldo = parseFloat((saldoAtual + quantidade).toFixed(2));
     return true;
 
   } catch (error) {
-    //console.error("❌ Erro na requisição:", error);
+    console.error("❌ Erro na requisição:", error);
     return false;
   }
 };
