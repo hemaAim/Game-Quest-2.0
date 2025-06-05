@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { auth } from "../firabase.config";
-import {  signOut } from "firebase/auth";
+import { signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { TemporadaELiga } from "@/app/types/TemporadaELiga"
 import Card from "./component/Dashboard/Card";
@@ -29,7 +29,7 @@ export default function Home() {
 
   const { temporadaELiga, erro } = useTemporadaELiga();
 
-  // ... seus outros states
+
   const { user, aluno, loading } = useAuth();
   const router = useRouter();
 
@@ -37,15 +37,15 @@ export default function Home() {
 
   useEffect(() => {
     const carregarTemporada = async () => {
-      console.log("Iniciando o carregamento da temporada...");
+      //  console.log("Iniciando o carregamento da temporada...");
       try {
         const data = await PegandoDadosDaTemporada();
         const temporadasArray = data.cards.edges.map((edge: { node: any }) => edge.node);
 
-        console.log("Dados da temporada recebidos:", temporadasArray);
+        //console.log("Dados da temporada recebidos:", temporadasArray);
         setTemporadas(temporadasArray);
       } catch (error) {
-        console.error("Erro ao carregar a temporada:", error);
+        // console.error("Erro ao carregar a temporada:", error);
       }
     };
 
@@ -63,9 +63,7 @@ export default function Home() {
   };
 
   // Renderização condicional no JSX
-  if (loading) {
-    return <p className="text-white">Carregando...</p>;
-  }
+
 
 
   if (loading) return <p>Carregando...</p>;
@@ -110,7 +108,7 @@ export default function Home() {
               </div>
             </div>
             <div className="md:col-span-1">
-              <Card img="../sorteioImg.svg" price={30} title="SORTEIO" link="game" />
+              <Card img="../imgSorteio.svg" price={30} title="SORTEIO" link="game" bool={true} />
             </div>
           </div>
 
@@ -135,7 +133,7 @@ export default function Home() {
 
           {/* Listagens de usuários e turma */}
           <section className="grid grid-cols-1 md:grid-cols-5 gap-6 mb-10">
-            
+
 
             <div className="md:col-span-5">
               <ListaTurmaDoAlunoLogado turma={aluno?.turma_do_wit} title={aluno?.turma_do_wit} email={aluno?.email} />

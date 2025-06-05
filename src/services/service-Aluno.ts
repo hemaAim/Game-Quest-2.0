@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Aluno } from '@/app/types/Aluno'
+import { toast } from 'sonner';
 
 
 
@@ -309,7 +310,7 @@ export const transferirBitcoin = async (
     });
 
     const balanceData = await balanceResponse.json();
-    console.log("📄 Resposta do saldo:", JSON.stringify(balanceData, null, 2));
+    //console.log("📄 Resposta do saldo:", JSON.stringify(balanceData, null, 2));
 
     if (balanceData.errors) {
       console.error("❌ Erro ao buscar saldo do destinatário:", balanceData.errors);
@@ -323,15 +324,15 @@ export const transferirBitcoin = async (
 const novoSaldo = parseFloat((saldoAtual + quantidade).toFixed(2));
 
 
-    console.log("💰 BITCOIN FIELD:", bitcoinField);
-    console.log("💰 Saldo atual:", saldoAtual);
-    console.log("➕ Novo saldo após recebimento:", novoSaldo);
+   // console.log("💰 BITCOIN FIELD:", bitcoinField);
+    //console.log("💰 Saldo atual:", saldoAtual);
+    //console.log("➕ Novo saldo após recebimento:", novoSaldo);
 
     // 🔹 3️⃣ PRIMEIRO, SUBTRAIR DO REMETENTE
-    console.log("🔄 Atualizando saldo do remetente...");
+    //console.log("🔄 Atualizando saldo do remetente...");
 
     if (user_bitcoin < quantidade) {
-      console.error("❌ o saldo atual tem que ser maior que a tranferencia:",);
+      toast.error("O saldo atual tem que ser maior que a tranferencia:",);
       return false;
     }
     const updateRemetenteQuery = `
@@ -356,12 +357,12 @@ const novoSaldo = parseFloat((saldoAtual + quantidade).toFixed(2));
     //console.log("📄 Resposta da atualização do remetente:", JSON.stringify(updateRemetenteData, null, 2));
 
     if (updateRemetenteData.errors) {
-      console.error("❌ Erro ao atualizar saldo do remetente:", updateRemetenteData.errors);
+      //console.error("❌ Erro ao atualizar saldo do remetente:", updateRemetenteData.errors);
       return false;
     }
 
     // 🔹 4️⃣ AGORA, ADICIONAR AO DESTINATÁRIO
-    console.log("🔄 Atualizando saldo do destinatário...");
+    //console.log("🔄 Atualizando saldo do destinatário...");
     const updateDestinatarioQuery = `
         mutation {
            updateCardField(input: {card_id: ${destinatarioId}, field_id: "bitcoin", new_value: "${novoSaldo.toFixed(2)}"}) {
@@ -385,15 +386,15 @@ const novoSaldo = parseFloat((saldoAtual + quantidade).toFixed(2));
     //"📄 Resposta da atualização do destinatário:", JSON.stringify(updateDestinatarioData, null, 2));
 
     if (updateDestinatarioData.errors) {
-      console.error("❌ Erro ao atualizar saldo do destinatário:", updateDestinatarioData.errors);
+     // console.error("❌ Erro ao atualizar saldo do destinatário:", updateDestinatarioData.errors);
       return false;
     }
 
-    console.log("✅ Transferência concluída com sucesso!");
+   // console.log("✅ Transferência concluída com sucesso!");
     return true;
 
   } catch (error) {
-    console.error("❌ Erro na requisição:", error);
+    //console.error("❌ Erro na requisição:", error);
     return false;
   }
 };

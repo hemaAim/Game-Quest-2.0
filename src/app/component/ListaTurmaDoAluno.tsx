@@ -8,6 +8,8 @@ import Gema from "./Gema";
 import SkeletonTable from "./Dashboard/SkeletonTable";
 import { useAuth } from "../context/AuthContext";
 import EnviarGemaModal from "./EnviarGema";
+import { toast } from "sonner";
+import Toaser from "./toaser";
 
 interface ListaAlunoProps {
    email?: string;
@@ -30,6 +32,8 @@ export default function ListaTurmaDoAlunoLogado({ title, turma, email }: ListaAl
    const [valorTransferencia, setValorTransferencia] = useState<number | "">("");
    const [, setErroTransferencia] = useState<string>("");
 
+const [mostrarToaser, setMostrarToaser] = useState(false);
+
 
 
 
@@ -40,11 +44,11 @@ export default function ListaTurmaDoAlunoLogado({ title, turma, email }: ListaAl
             setLoading(true);
             const { alunos } = await ListaDeAlunosPorTurmaDoAluno(turma!);
             setAlunos(alunos);
-            console.log("Turma recebida:", turma);
+          
 
          } catch (error) {
             console.error(error);
-            console.log("Turma recebida:", turma);
+            console.log("Turma recebida erro:", turma);
 
             setErro("Erro ao carregar alunos. Tente novamente.");
          } finally {
@@ -57,7 +61,7 @@ export default function ListaTurmaDoAlunoLogado({ title, turma, email }: ListaAl
       }
    }, [turma]);
 
-   console.log("Turma recebida:", turma);
+  
    const getField = (aluno: Aluno, fieldName: string) =>
       aluno.fields?.find((field) => field.name === fieldName)?.value || "-";
 
@@ -85,11 +89,14 @@ export default function ListaTurmaDoAlunoLogado({ title, turma, email }: ListaAl
 
       console.log("biticon do aluno dentro do handletrafnferencia:", bitcoinDisponivel, "aluno", aluno?.bitcoin)
       if (valorTransferencia === "" || valorTransferencia <= 0) {
-         setErroTransferencia("Digite um valor válido.");
+        
+         
+           toast.warning("o valor tem que ser maior que zero")
+           
          return;
       }
 
-      setErroTransferencia("");
+    
 
       const valorAtualizadoParaNumero = Number(String(aluno?.bitcoin).replace(/\./g, "").replace(",", "."));
 
@@ -102,6 +109,7 @@ export default function ListaTurmaDoAlunoLogado({ title, turma, email }: ListaAl
          Number(valorTransferencia) || 0
       );
 
+       
       if (sucesso) {
 
          alert("Transferência realizada com sucesso ✅✨");
@@ -113,6 +121,7 @@ export default function ListaTurmaDoAlunoLogado({ title, turma, email }: ListaAl
 
    return (
       <div className={`${bebasNeue.className} 2xl:w-4/6 sm:min-w-[300px] lg:w-full relative shadow-md sm:rounded-lg`}>
+       
          {erro && <p className="text-red-500 text-sm">{erro}</p>}
 
          {loading ? (
@@ -128,7 +137,7 @@ export default function ListaTurmaDoAlunoLogado({ title, turma, email }: ListaAl
                <table className="w-full text-sm text-left rtl:text-right">
                   <thead className="text-gray-100 uppercase">
                      <tr>
-                        <th className="px-6 py-3">#</th> {/* ranking */}
+                        <th className="px-6 py-3">#</th> 
                         <th className="px-6 py-3">Nome</th>
                         <th className="px-6 py-3">GEMA</th>
                         <th className="px-6 py-3">Turma</th>
