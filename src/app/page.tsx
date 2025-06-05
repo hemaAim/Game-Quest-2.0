@@ -45,7 +45,7 @@ export default function Home() {
         //console.log("Dados da temporada recebidos:", temporadasArray);
         setTemporadas(temporadasArray);
       } catch (error) {
-        // console.error("Erro ao carregar a temporada:", error);
+         console.error("Erro ao carregar a temporada:", error);
       }
     };
 

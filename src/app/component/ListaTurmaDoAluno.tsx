@@ -9,7 +9,7 @@ import SkeletonTable from "./Dashboard/SkeletonTable";
 import { useAuth } from "../context/AuthContext";
 import EnviarGemaModal from "./EnviarGema";
 import { toast } from "sonner";
-import Toaser from "./toaser";
+
 
 interface ListaAlunoProps {
    email?: string;
@@ -31,8 +31,6 @@ export default function ListaTurmaDoAlunoLogado({ title, turma, email }: ListaAl
    const [alunoSelecionado, setAlunoSelecionado] = useState<Aluno | null>(null);
    const [valorTransferencia, setValorTransferencia] = useState<number | "">("");
    const [, setErroTransferencia] = useState<string>("");
-
-const [mostrarToaser, setMostrarToaser] = useState(false);
 
 
 
