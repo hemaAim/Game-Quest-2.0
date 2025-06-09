@@ -138,7 +138,7 @@ const router = useRouter();
             {/* Aqui você mostra quantos pontos o usuário marcou (score) 
             e quantos pontos o quiz totalmente valia (totalAvailablePoints). */}
             <p>
-               Você fez <strong>{score}</strong> pontos de um total de{" "}
+               Você fez <strong>{score}</strong> pontos de um total de
                <strong>{totalAvailablePoints}</strong>.
             </p>
             <button
