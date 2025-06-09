@@ -625,6 +625,7 @@ export const ReceberRecompensaPosAtividade = async (
 
   destinatarioId: string,
   quantidadeGema: number,
+  bool: boolean
 
 
 

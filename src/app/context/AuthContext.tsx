@@ -36,28 +36,30 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+      const currentPath = window.location.pathname;
+      const publicRoutes = ["/", "/login", "/cadastro", "/quizz"];
+      const adminRoutes = ["/admin", "/admin/quiz", "/admin/configuracoes"];
+
       if (firebaseUser?.email) {
         setUser(firebaseUser);
         try {
           const alunoData = await AlunoLoginAutenticacao(firebaseUser.email);
-          setAluno(alunoData); 
+          setAluno(alunoData);
 
-          
-        // Redirecionar para admin se for ADM
-        if (alunoData?.role === "ADM") {
-          router.push("/admin");
-          return;
-        }
+         
+
+          // Se for ALUNO e tentar acessar rota de ADM
+          if (alunoData?.role !== "ADM" && adminRoutes.includes(currentPath)) {
+            router.push("/unauthorized");
+          }
+
         } catch (error) {
           console.error("Erro ao buscar aluno:", error);
         } finally {
           setLoading(false);
         }
       } else {
-        const publicRoutes = ["/login", "/cadastro"];
-        const path = window.location.pathname;
-
-        if (!publicRoutes.includes(path)) {
+        if (!publicRoutes.includes(currentPath)) {
           router.push("/login");
         }
         setLoading(false);
@@ -66,6 +68,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     return () => unsubscribe();
   }, [router]);
+
 
   const logout = async () => {
     await signOut(auth);

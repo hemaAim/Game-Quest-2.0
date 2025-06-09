@@ -13,19 +13,20 @@ interface ListaAlunoADMProps {
   title?: string;
 }
 
-const bebasNeue = Bebas_Neue({ 
-   subsets: ['latin'],
-    preload: true,
-    weight: ["400"] });
+const bebasNeue = Bebas_Neue({
+  subsets: ['latin'],
+  preload: true,
+  weight: ["400"]
+});
 
-export default function ListaTurmaDoAlunoADM({ title, turma}: ListaAlunoADMProps) {
+export default function ListaTurmaDoAlunoADM({ title, turma }: ListaAlunoADMProps) {
   const [alunos, setAlunos] = useState<Aluno[]>([]);
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState<string>("");
   const [alunoSelecionado, setAlunoSelecionado] = useState<Aluno | null>(null);
   const [bitcoin, setBitcoin] = useState("");
   const [pontosAtuais, setPontosAtuais] = useState("");
-  const [termoPesquisa, ] = useState("");
+  const [termoPesquisa,] = useState("");
 
   // Função para enviar pontos e bitcoin para API
   const dataEnvioPontos = async () => {
@@ -92,7 +93,7 @@ export default function ListaTurmaDoAlunoADM({ title, turma}: ListaAlunoADMProps
             <p className="text-gray-700">Sua turma:</p> {title}
           </h2>
 
-        
+
 
           <table className="w-full text-sm text-left rtl:text-right">
             <thead className="text-gray-100 uppercase">

@@ -39,13 +39,14 @@ export default function Home() {
     const carregarTemporada = async () => {
       //  console.log("Iniciando o carregamento da temporada...");
       try {
-        const data = await PegandoDadosDaTemporada();
-        const temporadasArray = data.cards.edges.map((edge: { node: any }) => edge.node);
+        const temporadaAtiva = await PegandoDadosDaTemporada();
+        setTemporadas(temporadaAtiva ? [temporadaAtiva] : []);
+
 
         //console.log("Dados da temporada recebidos:", temporadasArray);
-        setTemporadas(temporadasArray);
+
       } catch (error) {
-         console.error("Erro ao carregar a temporada:", error);
+        console.error("Erro ao carregar a temporada:", error);
       }
     };
 
@@ -108,7 +109,7 @@ export default function Home() {
               </div>
             </div>
             <div className="md:col-span-1">
-              <Card img="../imgSorteio.svg" price={30} title="SORTEIO" link="game" bool={true} />
+              <Card img="../imgSorteio.svg" price={30} title="Quizz" link="game" bool={false} />
             </div>
           </div>
 

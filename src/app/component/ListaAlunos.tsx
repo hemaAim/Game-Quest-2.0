@@ -88,7 +88,6 @@ export default function ListaAlunos({ title }: ListaAlunoProps) {
                         <th className="px-6 py-3">nome</th>
                         <th className="px-6 py-3">gemas</th>
                         <th className="px-6 py-3">PONTOS</th>
-
                         <th className="px-6 py-3">turma</th>
                      </tr>
                   </thead>

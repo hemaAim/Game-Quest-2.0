@@ -8,7 +8,7 @@ interface VRcardProps {
    vencimento: string;
    img: string;
    time: string;
-    onClick: any
+   onClick: any
 }
 
 export default function VRCard({ title, price, vencimento, onClick, time }: VRcardProps) {
@@ -37,11 +37,13 @@ export default function VRCard({ title, price, vencimento, onClick, time }: VRca
       <div className="rounded-xl p-2 w-72 text-white font-sans shadow-lg">
          <div className="bg-[#07070F] rounded-xl p-4">
             <div className="relative mb-4">
-               <Image 
-               
+               <Image
+
                   src={`/cardCompra.svg`}
+                  width={100}
+                  height={100}
                   alt="Óculos VR"
-                  className="rounded-lg w-full object-cover opacity-20"
+                  className="rounded-lg w-full object-cover opacity-10"
                />
                <span className="absolute top-2 left-2 text-white font-bold text-xl">
                   {title.toUpperCase()}
@@ -57,7 +59,7 @@ export default function VRCard({ title, price, vencimento, onClick, time }: VRca
                <div className="flex flex-col items-start">
 
                   {formatarVencimento(vencimento) ? (
-                     <div className="text-xs bg-blue-600 text-white rounded-full px-1 py-1">
+                     <div className="text-xs bg-blue-600 text-white rounded-full px-2 py-1">
                         {formatarVencimento(vencimento)}
                      </div>
                   ) : (

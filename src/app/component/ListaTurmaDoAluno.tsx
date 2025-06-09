@@ -146,7 +146,7 @@ export default function ListaTurmaDoAlunoLogado({ title, turma, email }: ListaAl
                   <tbody>
                      {alunosFiltrados.map((aluno, index) => (
                         <tr key={aluno.id} className="bg-[#07070F] " >
-                           <td className="px-6 py-4 text-gray-400">{index + 1}</td> {/* posição */}
+                           <td className="px-6 py-4 text-gray-400">{index + 1}</td> 
                            <td className="px-6 py-4 text-gray-400">{getField(aluno, "Nome do Aluno")}</td>
                            <td className="px-6 py-4 text-gray-400">
                               <span style={{ whiteSpace: "nowrap", display: "inline-flex", alignItems: "center", gap: "0.25rem" }}>

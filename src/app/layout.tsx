@@ -3,7 +3,8 @@ import { Geist, Geist_Mono, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "./context/AuthContext";
 import { Toaster } from "sonner";
-
+import { QuizProvider } from "./context/QuizContext";
+import { CodeProvider } from "./context/CodeContext";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -37,7 +38,11 @@ export default function RootLayout({
       >
         <Toaster position="top-center" richColors closeButton />
         <AuthProvider>
-          {children}
+          <CodeProvider> 
+          <QuizProvider>
+            {children}
+          </QuizProvider>
+          </CodeProvider>
         </AuthProvider>
 
 
