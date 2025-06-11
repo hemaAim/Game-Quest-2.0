@@ -14,14 +14,16 @@ import { useAuth } from "../context/AuthContext";
 
 import Gema from "./Gema";
 import { ReceberRecompensaPosAtividade } from "@/services/service-Aluno";
-
+import { toast } from "sonner";
+import Confetti from 'react-confetti';
 import Image from "next/image";
 
 
-const Cherry = Cherry_Bomb_One({ 
-   weight: ["400"], 
+
+const Cherry = Cherry_Bomb_One({
+   weight: ["400"],
    subsets: ["latin"]
- })
+})
 interface QuizClientProps {
    quiz: QuizData;
 
@@ -36,48 +38,52 @@ const QuizClient: React.FC<QuizClientProps> = ({ quiz }) => {
    const [timeLeft, setTimeLeft] = useState<number>(0);
    const questions: Question[] = quiz.info.questions;
    const q: Question = questions[current];
-const router = useRouter();
+   const router = useRouter();
+   const [showConfetti, setShowConfetti] = useState(false);
 
-
+   if (!quiz || !quiz.info.questions || quiz.info.questions.length === 0) {
+      return <div>Este quiz não possui questões disponíveis.</div>;
+   }
+   console.log("QUESTIONS", quiz.info.questions);
    // Função para enviar pontos e bitcoin para API
    const { aluno } = useAuth()
 
-const handleNext = useCallback(() => {
-   setSelectedAnswer(null);
-   setShowFeedback(false);
+   const handleNext = useCallback(() => {
+      setSelectedAnswer(null);
+      setShowFeedback(false);
 
-   if (current + 1 < questions.length) {
-      setCurrent(current + 1);
-   } else {
-      setShowResult(true);
-   }
-}, [current, questions.length]);
+      if (current + 1 < questions.length) {
+         setCurrent(current + 1);
+      } else {
+         setShowResult(true);
+      }
+   }, [current, questions.length]);
 
 
 
    // Atualiza o tempo restante sempre que a pergunta mudar
- useEffect(() => {
-   const total = q.time / 1000;
-   setTimeLeft(total);
-}, [q.time]);
+   useEffect(() => {
+      const total = q.time / 1000;
+      setTimeLeft(total);
+   }, [q.time]);
 
 
- useEffect(() => {
-   if (timeLeft <= 0) return;
+   useEffect(() => {
+      if (timeLeft <= 0) return;
 
-   const interval = setInterval(() => {
-      setTimeLeft(prev => {
-         if (prev <= 0.1) {
-            clearInterval(interval);
-            handleNext();
-            return 0;
-         }
-         return +(prev - 0.1).toFixed(1);
-      });
-   }, 100);
+      const interval = setInterval(() => {
+         setTimeLeft(prev => {
+            if (prev <= 0.1) {
+               clearInterval(interval);
+               handleNext();
+               return 0;
+            }
+            return +(prev - 0.1).toFixed(1);
+         });
+      }, 100);
 
-   return () => clearInterval(interval);
-}, [handleNext, timeLeft]);
+      return () => clearInterval(interval);
+   }, [handleNext, timeLeft]);
 
 
    // Verifica se existe mídia do tipo "image" na pergunta atual
@@ -99,6 +105,7 @@ const handleNext = useCallback(() => {
          setScore((prev) => prev + currentQuestion.structure.marks.correct);
       }
 
+
       // Se quiser avançar automaticamente após alguns segundos, você pode:
       setTimeout(() => handleNext(), 1500);
    };
@@ -108,13 +115,13 @@ const handleNext = useCallback(() => {
 
 
    const totalAvailablePoints = questions.reduce(
-      (total, question) => total + question.structure.marks.correct,
+      (total, question) => total + question?.structure?.marks?.correct,
       0
    );
 
 
    // Avança para a próxima pergunta ou exibe resultado final
- 
+
    const dataEnvioPontos = async () => {
       if (!aluno) {
          alert("o aluno esta auxente");
@@ -124,7 +131,10 @@ const handleNext = useCallback(() => {
       try {
          // Aqui converte bitcoin para número, ajuste conforme necessário
          await ReceberRecompensaPosAtividade(aluno?.id, Number(score));
-         alert("Dados enviados com sucesso!"); 
+
+         toast.info(`vc recebeu ${score} pontos`)
+         setShowConfetti(true);
+         setTimeout(() => setShowConfetti(false), 7000);
          router.push("/");
 
       } catch (error) {
@@ -133,23 +143,49 @@ const handleNext = useCallback(() => {
       }
    };
    if (showResult) {
-      return (
-         <main className="p-6 max-w-3xl mx-auto z-20">
 
-            <h2 className="text-3xl font-bold mb-4">Resultado Final</h2>
-            {/* Aqui você mostra quantos pontos o usuário marcou (score) 
-            e quantos pontos o quiz totalmente valia (totalAvailablePoints). */}
-            <p>
-               Você fez <strong>{score}</strong> pontos de um total de
-               <strong>{totalAvailablePoints}</strong>.
-            </p>
-            <button
-               className="mt-4 px-4 py-2  text-white rounded"
-               onClick={dataEnvioPontos}
-            >
-               Finalizar e Receber Pontos
-            </button>
+
+      return (
+         <main className="p-6 max-w-3xl mx-auto z-20 flex flex-col items-center justify-center  overflow-hidden font-sans ">
+            <div className="bg-[#07070F] rounded-2xl shadow-xl p-8 w-full text-center space-y-6">
+               <h2 className="text-4xl font-extrabold text-gray-300">  {score > 0 ? (
+                   <p>🎉</p>
+               ) : ( <p>😞</p> )} Resultado Final</h2>
+
+               <p className="text-lg text-gray-200">
+                  Você fez{" "}
+                  <span className="text-green-600 font-bold text-xl">{score} </span>
+                  pontos de um total de{" "}
+                  <span className="text-blue-600 font-bold text-xl">{totalAvailablePoints}</span>
+               </p>
+               {score > 0 ? (
+                  <Confetti />
+               ) : (
+                  <div className="flex flex-col items-center justify-center min-h-[300px] p-8  rounded-lg shadow-md max-w-md mx-auto">
+                     <svg
+                        className="w-16 h-16 mb-4 text-red-400"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth={2}
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                     >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M18.364 5.636l-12.728 12.728M5.636 5.636l12.728 12.728" />
+                     </svg>
+                     <h2 className="text-2xl font-semibold mb-2 text-red-500">Ops, não foi dessa vez!</h2>
+                     <p className="text-center text-red-500">Mas não desista, tente novamente e você vai conseguir! 🚀</p>
+                  </div>
+               )}
+
+               <button
+                  className="mt-4 bg-orange-500 hover:to-indigo-700 transition-all duration-300 ease-in-out px-6 py-3 text-white font-semibold text-lg rounded-xl shadow-md hover:scale-105"
+                  onClick={dataEnvioPontos}
+               >
+                  ✅ Finalizar 
+               </button>
+            </div>
          </main>
+
       );
    }
    const optionColors = [
@@ -161,12 +197,15 @@ const handleNext = useCallback(() => {
       "bg-purple-600",
    ];
 
- 
+
 
    return (
 
 
       <div className="bg-[#00000A] min-h-screen text-white font-sans items-center flex flex-col">
+
+
+
 
          <header className=" w-full bg-gray-100 h-10 flex items-center justify-center text-gray-800">
 
@@ -195,13 +234,14 @@ const handleNext = useCallback(() => {
          {/* Caixa da pergunta */}
          <div className="p-4 w-full h-screen  max-w-6xl rounded-lg flex flex-col justify-center items-center">
 
+
+
             <p
                className={`${Cherry.className} mb-1 text-4xl font-bold text-white`}
                dangerouslySetInnerHTML={{
                   __html: q.structure.query.text.toUpperCase(),
                }}
             ></p>
-
 
 
             {/* Se houver imagem associada, exibe abaixo do texto */}
@@ -262,10 +302,10 @@ const handleNext = useCallback(() => {
 
                         <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
 
-                           <circle cx="60" cy="60" r="50" fill="#2ECC71" stroke="white" stroke-width="10" />
+                           <circle cx="60" cy="60" r="50" fill="#2ECC71" stroke="white" strokeWidth="10" />
 
 
-                           <path d="M40 65 L55 80 L80 45" fill="none" stroke="white" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+                           <path d="M40 65 L55 80 L80 45" fill="none" stroke="white" strokeWidth="12" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
 
 
@@ -284,11 +324,11 @@ const handleNext = useCallback(() => {
 
                         <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
 
-                           <circle cx="60" cy="60" r="50" fill="#FF3B5C" stroke="white" stroke-width="10" />
+                           <circle cx="60" cy="60" r="50" fill="#FF3B5C" stroke="white" strokeWidth="10" />
 
 
-                           <line x1="40" y1="40" x2="80" y2="80" stroke="white" stroke-width="12" stroke-linecap="rounded" />
-                           <line x1="80" y1="40" x2="40" y2="80" stroke="white" stroke-width="12" stroke-linecap="" />
+                           <line x1="40" y1="40" x2="80" y2="80" stroke="white" strokeWidth="12" strokeLinecap="round" />
+                           <line x1="80" y1="40" x2="40" y2="80" stroke="white" strokeWidth="12" strokeLinecap="round" />
                         </svg>
 
                         <div className="w-full ">

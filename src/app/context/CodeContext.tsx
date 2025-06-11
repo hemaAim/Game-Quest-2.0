@@ -10,10 +10,12 @@ import {
 
 interface CodeContextType {
   code: string | null;
+  gerarNovoCodigo: () => void; // <-- NOVO
 }
 
 const CodeContext = createContext<CodeContextType>({
   code: null,
+  gerarNovoCodigo: () => {},
 });
 
 export const CodeProvider = ({ children }: { children: ReactNode }) => {
@@ -23,27 +25,29 @@ export const CodeProvider = ({ children }: { children: ReactNode }) => {
     return Math.floor(10000 + Math.random() * 90000).toString();
   }
 
-  useEffect(() => {
-    // Verifica se já existe um código no localStorage
-    const codigoExistente = localStorage.getItem("codigo-temporario");
+  const gerarNovoCodigo = () => {
+    const novoCodigo = gerarCodigoAleatorio();
+    setCode(novoCodigo);
+    localStorage.setItem("codigo-temporario", novoCodigo);
 
+    // Expiração em 5 minutos
+    const tempoExpiracao = 1 * 60 * 10;
+    setTimeout(() => {
+      localStorage.removeItem("codigo-temporario");
+    }, tempoExpiracao);
+  };
+
+  useEffect(() => {
+    const codigoExistente = localStorage.getItem("codigo-temporario");
     if (codigoExistente) {
       setCode(codigoExistente);
     } else {
-      const novoCodigo = gerarCodigoAleatorio();
-      setCode(novoCodigo);
-      localStorage.setItem("codigo-temporario", novoCodigo);
-
-      // Expiração em 5 minutos
-      const tempoExpiracao = 5 * 60 * 1000;
-      setTimeout(() => {
-        localStorage.removeItem("codigo-temporario");
-      }, tempoExpiracao);
+      gerarNovoCodigo();
     }
   }, []);
 
   return (
-    <CodeContext.Provider value={{ code }}>
+    <CodeContext.Provider value={{ code, gerarNovoCodigo }}>
       {children}
     </CodeContext.Provider>
   );

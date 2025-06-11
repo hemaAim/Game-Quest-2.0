@@ -9,6 +9,7 @@ interface Props {
 }
 
 export default function QuizClientWrapperID({ quiz }: Props) {
+
   return (
     <div>
       <QuizClient quiz={quiz} />
