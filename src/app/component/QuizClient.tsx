@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
+
 
 import {
    QuizData,
@@ -41,6 +42,16 @@ const router = useRouter();
    // Função para enviar pontos e bitcoin para API
    const { aluno } = useAuth()
 
+const handleNext = useCallback(() => {
+   setSelectedAnswer(null);
+   setShowFeedback(false);
+
+   if (current + 1 < questions.length) {
+      setCurrent(current + 1);
+   } else {
+      setShowResult(true);
+   }
+}, [current, questions.length]);
 
 
 
@@ -150,16 +161,7 @@ const router = useRouter();
       "bg-purple-600",
    ];
 
-  function handleNext() {
-      setSelectedAnswer(null);
-      setShowFeedback(false);
-
-      if (current + 1 < questions.length) {
-         setCurrent(current + 1);
-      } else {
-         setShowResult(true);
-      }
-   }
+ 
 
    return (
 
