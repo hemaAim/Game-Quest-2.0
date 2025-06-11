@@ -1,8 +1,6 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-import {QuizData} from "@/app/types" 
-
 interface QuizContextProps {
   quizPin: string;
   setQuizPin: (pin: string) => void;

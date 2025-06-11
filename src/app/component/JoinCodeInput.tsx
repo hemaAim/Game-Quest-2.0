@@ -23,7 +23,7 @@ export default function JoinCodeInput({ codeID, url }: codeProps) {
     setAttempted(true);
 
     if (isCorrect) {
-      router.push(`/quizz/${codeID}?idQuizz=${url}`); // ✅ funciona com next/navigation
+      router.push(`/quizz/${url}`); // ✅ funciona com next/navigation
       
     }
   };

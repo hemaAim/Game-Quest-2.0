@@ -13,11 +13,14 @@ import { useAuth } from "../context/AuthContext";
 
 import Gema from "./Gema";
 import { ReceberRecompensaPosAtividade } from "@/services/service-Aluno";
-import { Aluno } from "../types/Aluno";
+
 import Image from "next/image";
 
 
-const Cherry = Cherry_Bomb_One({ weight: ["400"] })
+const Cherry = Cherry_Bomb_One({ 
+   weight: ["400"], 
+   subsets: ["latin"]
+ })
 interface QuizClientProps {
    quiz: QuizData;
 
@@ -33,11 +36,7 @@ const QuizClient: React.FC<QuizClientProps> = ({ quiz }) => {
    const questions: Question[] = quiz.info.questions;
    const q: Question = questions[current];
 const router = useRouter();
-   const [erro, setErro] = useState<string>("");
-   const [alunoSelecionado, setAlunoSelecionado] = useState<Aluno | null>(null);
-   const [bitcoin, setBitcoin] = useState("");
-   const [pontosAtuais, setPontosAtuais] = useState("");
-   const [termoPesquisa,] = useState("");
+
 
    // Função para enviar pontos e bitcoin para API
    const { aluno } = useAuth()
@@ -46,27 +45,29 @@ const router = useRouter();
 
 
    // Atualiza o tempo restante sempre que a pergunta mudar
-   useEffect(() => {
-      const total = q.time / 1000; // total em segundos
-      setTimeLeft(total);
-   }, [current]);
+ useEffect(() => {
+   const total = q.time / 1000;
+   setTimeLeft(total);
+}, [q.time]);
 
-   useEffect(() => {
-      if (timeLeft <= 0) return;
 
-      const interval = setInterval(() => {
-         setTimeLeft(prev => {
-            if (prev <= 0.1) {
-               clearInterval(interval);
-               handleNext(); // ou o que quiser ao terminar
-               return 0;
-            }
-            return +(prev - 0.1).toFixed(1); // diminui em 0.1s
-         });
-      }, 100); // atualiza a cada 100ms
+ useEffect(() => {
+   if (timeLeft <= 0) return;
 
-      return () => clearInterval(interval);
-   }, [timeLeft]);
+   const interval = setInterval(() => {
+      setTimeLeft(prev => {
+         if (prev <= 0.1) {
+            clearInterval(interval);
+            handleNext();
+            return 0;
+         }
+         return +(prev - 0.1).toFixed(1);
+      });
+   }, 100);
+
+   return () => clearInterval(interval);
+}, [handleNext, timeLeft]);
+
 
    // Verifica se existe mídia do tipo "image" na pergunta atual
    const perguntaTemImagem = (q: Question): boolean => {
@@ -102,17 +103,7 @@ const router = useRouter();
 
 
    // Avança para a próxima pergunta ou exibe resultado final
-   function handleNext() {
-      setSelectedAnswer(null);
-      setShowFeedback(false);
-
-      if (current + 1 < questions.length) {
-         setCurrent(current + 1);
-      } else {
-         setShowResult(true);
-      }
-   }
-
+ 
    const dataEnvioPontos = async () => {
       if (!aluno) {
          alert("o aluno esta auxente");
@@ -121,7 +112,7 @@ const router = useRouter();
 
       try {
          // Aqui converte bitcoin para número, ajuste conforme necessário
-         await ReceberRecompensaPosAtividade(aluno?.id, Number(score), true);
+         await ReceberRecompensaPosAtividade(aluno?.id, Number(score));
          alert("Dados enviados com sucesso!"); 
          router.push("/");
 
@@ -159,6 +150,16 @@ const router = useRouter();
       "bg-purple-600",
    ];
 
+  function handleNext() {
+      setSelectedAnswer(null);
+      setShowFeedback(false);
+
+      if (current + 1 < questions.length) {
+         setCurrent(current + 1);
+      } else {
+         setShowResult(true);
+      }
+   }
 
    return (
 

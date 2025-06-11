@@ -49,4 +49,4 @@ export const CodeProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const codeAuth = () => useContext(CodeContext);
+export const CodeAuth = () => useContext(CodeContext);

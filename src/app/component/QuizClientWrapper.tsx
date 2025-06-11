@@ -1,26 +1,27 @@
 
 "use client";
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useAuth } from "@/app/context/AuthContext";
 import { useQuiz } from "@/app/context/QuizContext";
 
 import Header from "../component/Header";
 import PontuacoesXpsGema from "../component/Dashboard/PontuacoesXpsGema";
 import QuizCard from "./QuizCard";
-import { codeAuth } from "../context/CodeContext";
+import { CodeAuth } from "../context/CodeContext";
+
 
 
 
 export default function QuizClientWrapper({ quiz }: { quiz: any,  }) {
   const { user, aluno, logout } = useAuth(); 
 
-  const {code} = codeAuth()
+  const {code} = CodeAuth()
   const {quizPin} = useQuiz() 
 
 
   
 
- 
+ console.log(quiz)
   return (
     <div className="font-sans">
       <Header

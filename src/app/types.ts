@@ -1,5 +1,5 @@
 // types.ts
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface Option {
   id: string;
   text: string;

@@ -1,6 +1,7 @@
-// app/services/getQuizById.ts
-const QAPI = require("quizizz.js");
-const client = new QAPI.QuizizzClient();
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+    const QAPI = require("Quizizz.js");
+    const client = new QAPI.QuizizzClient();
 
 
 

@@ -1,7 +1,6 @@
 import Image from "next/image";
 import QuizClientWrapper from "@/app/component/QuizClientWrapper";
 import { getQuizById } from "@/services/getQuizById";
-import { useQuiz } from "../context/QuizContext";
 
 export default async function PageQuizz() {
    

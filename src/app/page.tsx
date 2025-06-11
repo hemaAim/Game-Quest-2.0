@@ -1,5 +1,5 @@
 "use client"
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { useEffect, useState } from "react";
 
 import { auth } from "../firabase.config";
@@ -109,7 +109,7 @@ export default function Home() {
               </div>
             </div>
             <div className="md:col-span-1">
-              <Card img="../imgSorteio.svg" price={30} title="Quizz" link="game" bool={false} />
+              <Card img="../imgSorteio.svg" price={30} title="Quizz" link="/quizz" bool={false} />
             </div>
           </div>
 

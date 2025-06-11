@@ -7,7 +7,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useState } from "react";
 
 import { useQuiz } from "@/app/context/QuizContext";
-import { codeAuth } from "@/app/context/CodeContext";
+import { CodeAuth } from "@/app/context/CodeContext";
 
 export default function AdminPageQuiz() {
   const { user, aluno, logout } = useAuth();
@@ -21,7 +21,7 @@ export default function AdminPageQuiz() {
   };
  
 
-  const {code} = codeAuth()
+  const {code} = CodeAuth()
   return (
     <RequireAdmin>
       <div className="flex flex-col items-center p-4 font-sans">
