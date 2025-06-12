@@ -16,10 +16,10 @@ export default async function QuizClientPage({ params }: Props) {
   if (!quizId) return <p>Erro: ID não encontrado</p>;
 
   const quiz = await getQuizById(quizId);
-
+const plainQuiz = JSON.parse(JSON.stringify(quiz))
   return (
     <div className="text-white w-full">
-     <QuizClientWrapperID quiz={quiz} />
+     <QuizClientWrapperID quiz={plainQuiz} />
     </div>
   );
 }

@@ -12,7 +12,7 @@ import { CodeAuth } from "../context/CodeContext";
 
 
 
-export default function QuizClientWrapper({ quiz }: { quiz: any,  }) {
+export default function QuizClientWrapper() {
   const { user, aluno, logout } = useAuth(); 
 
   const {code} = CodeAuth()
@@ -21,7 +21,7 @@ export default function QuizClientWrapper({ quiz }: { quiz: any,  }) {
 
   
 
- console.log(quiz)
+
   return (
     <div className="font-sans">
       <Header
