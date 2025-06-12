@@ -28,7 +28,7 @@ const SignIn = () => {
       if (user) {
         const token = await user.user.getIdToken();
         console.log("Token:", token);
-        router.replace("/dashboard");
+        router.replace("/");
       }
     } catch (err: any) {
       alert("Erro no login: " + err.message);

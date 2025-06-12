@@ -39,11 +39,9 @@ const QuizClient: React.FC<QuizClientProps> = ({ quiz }) => {
    const questions: Question[] = quiz.info.questions;
    const q: Question = questions[current];
    const router = useRouter();
-   const [showConfetti, setShowConfetti] = useState(false);
+   const [, setShowConfetti] = useState(false);
 
-   if (!quiz || !quiz.info.questions || quiz.info.questions.length === 0) {
-      return <div>Este quiz não possui questões disponíveis.</div>;
-   }
+
    console.log("QUESTIONS", quiz.info.questions);
    // Função para enviar pontos e bitcoin para API
    const { aluno } = useAuth()
@@ -119,6 +117,10 @@ const QuizClient: React.FC<QuizClientProps> = ({ quiz }) => {
       0
    );
 
+
+      if (!quiz || !quiz.info.questions || quiz.info.questions.length === 0) {
+      return <div>Este quiz não possui questões disponíveis.</div>;
+   }
 
    // Avança para a próxima pergunta ou exibe resultado final
 

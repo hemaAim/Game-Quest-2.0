@@ -9,6 +9,8 @@ type Props = {
 };
 
 export default async function QuizClientPage({ params }: Props) {
+
+  
   const { id: quizId } = await params;
 
   if (!quizId) return <p>Erro: ID não encontrado</p>;

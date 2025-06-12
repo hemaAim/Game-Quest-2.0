@@ -1,16 +1,16 @@
-"use client";
-
+"use client"
 import {
   createContext,
   useContext,
   useEffect,
   useState,
+  useCallback,
   ReactNode,
 } from "react";
 
 interface CodeContextType {
   code: string | null;
-  gerarNovoCodigo: () => void; // <-- NOVO
+  gerarNovoCodigo: () => void;
 }
 
 const CodeContext = createContext<CodeContextType>({
@@ -21,21 +21,21 @@ const CodeContext = createContext<CodeContextType>({
 export const CodeProvider = ({ children }: { children: ReactNode }) => {
   const [code, setCode] = useState<string | null>(null);
 
-  function gerarCodigoAleatorio(): string {
+  const gerarCodigoAleatorio = useCallback((): string => {
     return Math.floor(10000 + Math.random() * 90000).toString();
-  }
+  }, []);
 
-  const gerarNovoCodigo = () => {
+  const gerarNovoCodigo = useCallback(() => {
     const novoCodigo = gerarCodigoAleatorio();
     setCode(novoCodigo);
     localStorage.setItem("codigo-temporario", novoCodigo);
 
-    // Expiração em 5 minutos
-    const tempoExpiracao = 1 * 60 * 10;
+    // Expiração em 10 minutos
+    const tempoExpiracao = 60 * 10 * 1000;
     setTimeout(() => {
       localStorage.removeItem("codigo-temporario");
     }, tempoExpiracao);
-  };
+  }, [gerarCodigoAleatorio]);
 
   useEffect(() => {
     const codigoExistente = localStorage.getItem("codigo-temporario");
@@ -44,7 +44,7 @@ export const CodeProvider = ({ children }: { children: ReactNode }) => {
     } else {
       gerarNovoCodigo();
     }
-  }, []);
+  }, [gerarNovoCodigo]);
 
   return (
     <CodeContext.Provider value={{ code, gerarNovoCodigo }}>
